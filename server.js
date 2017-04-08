@@ -19,42 +19,47 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
-app.post('/addContact', auth.connect(basic), function (req, res) {
-  var newContact = req.body
-  contacts.push(newContact)
-  res.send("Added Contact!")
-})
-
 app.get('/contacts', function (req, res){
-  res.send(contacts)
-})
+  res.send(contacts);
+});
 
 app.get('/getContact', function (req, res){
   var query = req.query;
-  // function to search contacts
   var searchResult = contactSearcher(query);
-  console.log(searchResult);
   res.send(searchResult);
-})
+});
+
+app.post('/addContact', auth.connect(basic), function (req, res) {
+  var newContact = req.body;
+  contacts.push(newContact);
+  console.log(req.user);
+  res.send("Added Contact!");
+});
 
 app.post('/updateContact', auth.connect(basic), function (req, res){
   var query = req.query;
   var data = req.body;
+  var user = req.user;
   var searchResult = contactSearcher(query);
   var i = contacts.indexOf(searchResult);
-  contactUpdater(i, data);
+  contactUpdater(i, data, user);
   res.send("Updated Contact Details!");
-})
+});
 
-var contactUpdater = function(index, details) {
+var contactUpdater = function(index, details, updater) {
   var contactToUpdate = contacts[index];
   for (var key in details) {
     contactToUpdate[key] = details[key];
   }
+  // log user who updated and time updated
+  contactToUpdate.updateInfo = {
+    updatedBy: updater,
+    updateTime: new Date().toLocaleString()
+  }
 }
 
 var contactSearcher = function(query) {
-  var result;
+  var result = [];
   contacts.forEach(function(contact){
     var match = true;
     for (var key in query) {
@@ -63,7 +68,7 @@ var contactSearcher = function(query) {
       }
     }
     if (match) {
-      result = contact;
+      result.push(contact);
     }
   })
   return result;
