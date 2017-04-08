@@ -125,7 +125,12 @@ Fields are case sensitive.
   }
   ```
   
-  
+  # To Do List
+
+  1. Integrate Passport auth with a couple strategies (facebook, google)
+  2. Handle deleting contacts
+  3. Handle and prevent duplicate contacts
+  4. Provide unique IDs to entrys, persist to MongoDB
   
   
   
