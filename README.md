@@ -48,7 +48,7 @@ Fields are case sensitive.
 
   ```
 
-  ## Get a Specific Contact - this endpoint will match the supplied parameters with any and every contact containing    matching contact details.
+  ## Get a Specific Contact - this endpoint will match the supplied parameters with any and every contact containing      matching contact details.
   ### `/getContact`
   
   Example Usage:
@@ -106,8 +106,8 @@ Fields are case sensitive.
   }
   ```
 
-  ## Update a Contact - endpoint will search for the corresponding contact, based on the parameters you supply, and update the fields provided in the `JSON` formatted data inside the body of the request. 
-### `/updateContact`
+  ## Update a Contact - endpoint will search for the corresponding contact, based on the parameters you supply, and update the fields provided in the `JSON` formatted data inside the body of the request.
+  ### `/updateContact`
 
   ### Sample Usage:
 
@@ -123,6 +123,22 @@ Fields are case sensitive.
   {
    "email": "somethingsomething@yahoo.com"
   }
+
+  this endpoint also stores a record of the user that initiated the update, as well as a time stamp:
+
+  {
+    "firstName": "brent",
+    "lastName": "sayson",
+    "email": "12345@yahoo.com",
+    "number": "23456789",
+    "address": "nightmare on Elm Street",
+    "updateInfo": {
+      "updatedBy": "user",
+      "updateTime": "4/7/2017, 8:56:03 PM"
+    }
+  }
+
+  You can also use this endpoint, for example, to change the email, or firstName of all contacts where lastName === sayson. This endpoint can handle cases when searches produce multiple results, or only one result, and It can edit multiple fields, or just a single field. If you want to choose a SPECIFIC contact, be sure to use more fields for specificity.
   ```
   
   # To Do List
@@ -131,7 +147,5 @@ Fields are case sensitive.
   2. Handle deleting contacts
   3. Handle and prevent duplicate contacts
   4. Provide unique IDs to entrys, persist to MongoDB
-  
-  
   
                                                                   
