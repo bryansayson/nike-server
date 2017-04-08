@@ -48,8 +48,7 @@ Fields are case sensitive.
 
   ```
 
-  ## Get a Specific Contact - this endpoint will match the supplied parameters with any and every contact containing
-  matching contact details.
+  ## Get a Specific Contact - this endpoint will match the supplied parameters with any and every contact containing    matching contact details.
   ### `/getContact`
   
   Example Usage:
@@ -107,8 +106,8 @@ Fields are case sensitive.
   }
   ```
 
-  ## Update a Contact - endpoint will search for the corresponding contact, based on the parameters you supply,
-  and update the fields provided in the `JSON` formatted data inside the body of the request. `/updateContact`
+  ## Update a Contact - endpoint will search for the corresponding contact, based on the parameters you supply, and update the fields provided in the `JSON` formatted data inside the body of the request. 
+### `/updateContact`
 
   ### Sample Usage:
 
