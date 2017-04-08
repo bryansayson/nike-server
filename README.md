@@ -82,7 +82,7 @@ Fields are case sensitive.
 
   ```
 
-# POST endpoints
+# POST endpoints (password protected)
   
   Add a Contact - add a specific contact by supplying `JSON` `raw` data inside the `request` body
   `/addContact`
@@ -108,7 +108,23 @@ Fields are case sensitive.
   ```
 
   Update a Contact - endpoint will search for the corresponding contact, based on the parameters you supply,
-  and update the fields provided in the `JSON` formatted data inside the body of the request.
+  and update the fields provided in the `JSON` formatted data inside the body of the request. `/updateContact`
+
+  Sample Usage:
+
+  ```
+  If you want to update a contact where firstName === bryan and lastName === sayson:
+
+  POST http://localhost:3000/updateContact?firstName=bryan&lastName=sayson
+
+  with the information you want to be updated, in the body of the request:
+
+  for example if you want to change the email:
+
+  {
+   "email": "somethingsomething@yahoo.com"
+  }
+  ```
   
   
   
