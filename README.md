@@ -19,8 +19,8 @@ Fields are case sensitive.
 
 # GET endpoints
 
-  Contacts - this endpoint will supply all the contacts in storage.
-  `/contacts`
+  ## Contacts - this endpoint will supply all the contacts in storage.
+  ### `/contacts`
 
   Example Usage:
 
@@ -48,9 +48,9 @@ Fields are case sensitive.
 
   ```
 
-  Get a Specific Contact - this endpoint will match the supplied parameters with any and every contact containing
+  ## Get a Specific Contact - this endpoint will match the supplied parameters with any and every contact containing
   matching contact details.
-  `/getContact`
+  ### `/getContact`
   
   Example Usage:
   
@@ -84,8 +84,8 @@ Fields are case sensitive.
 
 # POST endpoints (password protected)
   
-  Add a Contact - add a specific contact by supplying `JSON` `raw` data inside the `request` body
-  `/addContact`
+  ## Add a Contact - add a specific contact by supplying `JSON` `raw` data inside the `request` body
+  ### `/addContact`
 
   Sample Usage:
 
@@ -107,10 +107,10 @@ Fields are case sensitive.
   }
   ```
 
-  Update a Contact - endpoint will search for the corresponding contact, based on the parameters you supply,
+  ## Update a Contact - endpoint will search for the corresponding contact, based on the parameters you supply,
   and update the fields provided in the `JSON` formatted data inside the body of the request. `/updateContact`
 
-  Sample Usage:
+  ### Sample Usage:
 
   ```
   If you want to update a contact where firstName === bryan and lastName === sayson:
