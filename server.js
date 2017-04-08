@@ -1,18 +1,20 @@
-var express = require('express')
-var app = express()
-var bodyParser = require('body-parser')
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
 var auth = require('http-auth');
+var contacts = [];
 
 // auth helper function
 var basic = auth.basic({
-        realm: "Web."
-    }, function (username, password, callback) { // Custom authentication method.
-        callback(username === "user" && password === "pass");
-    }
+      realm: "Web."
+  }, function (username, password, callback) { // Custom authentication method.
+      callback(username === "user" && password === "pass");
+  }
 );
 
-// data storage
-var contacts = [];
+app.listen(3000, function () {
+  console.log('Server is up on on port 3000!');
+});
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -32,7 +34,6 @@ app.get('/getContact', function (req, res){
 app.post('/addContact', auth.connect(basic), function (req, res) {
   var newContact = req.body;
   contacts.push(newContact);
-  console.log(req.user);
   res.send("Added Contact!");
 });
 
@@ -41,11 +42,14 @@ app.post('/updateContact', auth.connect(basic), function (req, res){
   var data = req.body;
   var user = req.user;
   var searchResult = contactSearcher(query);
-  var i = contacts.indexOf(searchResult);
-  contactUpdater(i, data, user);
+  searchResult.forEach(function(contact) {
+    var index = contacts.indexOf(contact);
+    contactUpdater(index, data, user);
+  })
   res.send("Updated Contact Details!");
 });
 
+// utility function to update contact records
 var contactUpdater = function(index, details, updater) {
   var contactToUpdate = contacts[index];
   for (var key in details) {
@@ -58,6 +62,7 @@ var contactUpdater = function(index, details, updater) {
   }
 }
 
+//utility function to search for a specific contact
 var contactSearcher = function(query) {
   var result = [];
   contacts.forEach(function(contact){
@@ -70,11 +75,6 @@ var contactSearcher = function(query) {
     if (match) {
       result.push(contact);
     }
-  })
+  });
   return result;
-}
-
-
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+};
